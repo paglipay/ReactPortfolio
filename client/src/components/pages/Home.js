@@ -31,8 +31,7 @@ function Home() {
       <Jumbotron style={{ backgroundImage: `url('https://source.unsplash.com/1600x300/?design')`, backgroundSize: 'cover' }}>
         <h1>Hello, world!</h1>
 
-          This is a simple hero unit, a simple jumbotron-style component for calling
-          extra attention to featured content or information.
+        If you need someone to create a cool website for you and or business, you have come to the right page.
 
         <p>
           <Button variant="flat" size="xxl">Learn more</Button>
@@ -46,14 +45,11 @@ function Home() {
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} fab icon="amazon" size="5x" /> */}
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title>We've got what you need!</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                  Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
                 </Card.Text>
-                  <Button variant="flat">Go somewhere</Button>
+                  <Button variant="flat">Get Started!</Button>
                 </Card.Body>
               </Card>
             </Col>
@@ -61,7 +57,7 @@ function Home() {
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" className="center" /> */}
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title>At Your Service</Card.Title>
                   <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
@@ -74,10 +70,9 @@ function Home() {
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title>Let's Get In Touch!</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                  Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                 </Card.Text>
                   <Button variant="flat">Go somewhere</Button>
                 </Card.Body>

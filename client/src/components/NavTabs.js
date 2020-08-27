@@ -19,6 +19,7 @@ function NavTabs() {
           <Nav.Link href="/admin">Admin</Nav.Link>
           <Nav.Link href="/modalpage">Application</Nav.Link>
           <Nav.Link href="/booksearch">Book Search</Nav.Link>
+          <Nav.Link href="/employeedirectory">Directory</Nav.Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
