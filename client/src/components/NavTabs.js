@@ -18,6 +18,7 @@ function NavTabs() {
           <Nav.Link href="/todo">Todo</Nav.Link>
           <Nav.Link href="/admin">Admin</Nav.Link>
           <Nav.Link href="/modalpage">Application</Nav.Link>
+          <Nav.Link href="/booksearch">Book Search</Nav.Link>
           <Nav.Link href="/employeedirectory">Directory</Nav.Link>
         </Nav>
         <Form inline>

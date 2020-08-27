@@ -6,6 +6,7 @@ import About from "./components/pages/About";
 import Blog from "./components/pages/Blog";
 import Contact from "./components/pages/Contact";
 import Todo from "./components/Todo/App";
+import BookSearch from "./components/BookSearch/pages/Books";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import Footer from "./components/Footer";
 
@@ -22,8 +23,8 @@ function App() {
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
         <Route path="/todo" component={Todo} />
+        <Route path="/booksearch" component={BookSearch} />
         <Route path="/employeedirectory" component={EmployeeDirectory} />
-
         <Footer />
       </>
     {/* </ThemeProvider> */}
