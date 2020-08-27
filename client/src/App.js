@@ -5,6 +5,7 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import Blog from "./components/pages/Blog";
 import Contact from "./components/pages/Contact";
+import Todo from "./components/Todo/App";
 import Footer from "./components/Footer";
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />
+        <Route path="/todo" component={Todo} />
 
         <Footer />
       </>
