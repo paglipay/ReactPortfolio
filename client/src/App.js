@@ -7,6 +7,7 @@ import Blog from "./components/pages/Blog";
 import Contact from "./components/pages/Contact";
 import Todo from "./components/Todo/App";
 import BookSearch from "./components/BookSearch/pages/Books";
+import Detail from "./components/BookSearch/pages/Detail";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import Footer from "./components/Footer";
 
@@ -14,7 +15,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <Router>
-    {/* <ThemeProvider theme={lightTheme}> */}
+      {/* <ThemeProvider theme={lightTheme}> */}
       <>
         {/* <GlobalStyles /> */}
         <NavTabs />
@@ -24,11 +25,14 @@ function App() {
         <Route path="/contact" component={Contact} />
         <Route path="/todo" component={Todo} />
         <Route path="/booksearch" component={BookSearch} />
+        <Route exact path="/books/:id">
+          <Detail />
+        </Route>
         <Route path="/employeedirectory" component={EmployeeDirectory} />
         <Footer />
       </>
-    {/* </ThemeProvider> */}
-  </Router>
+      {/* </ThemeProvider> */}
+    </Router>
   );
 }
 
