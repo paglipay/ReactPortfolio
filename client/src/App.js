@@ -29,7 +29,7 @@ function App() {
   }
 
   const logout = () => {
-    axios.get('/apis/users/logout')
+    axios.get('/api/users/logout')
       .then(function (data) {
         this.deAuthenticate();
         window.location.reload();
@@ -43,7 +43,7 @@ function App() {
       {/* <ThemeProvider theme={lightTheme}> */}
       <>
         {/* <GlobalStyles /> */}
-        <NavTabs authenticate={ authenticated }/>
+        <NavTabs authenticated={ authenticated }/>
         
         <Route exact path="/login" render={props => 
             <Login
