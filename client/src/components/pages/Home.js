@@ -5,7 +5,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 // import BasicTable from '../../components/MDB/BasicTable/BasicTable'
 // import Datatable from '../../components/MDB/Datatable/Datatable'
 // import FeaturesPage from '../../components/MDB/FeaturesPage/FeaturesPage'
-import NavTabs from "../NavTabs";
+// import NavTabs from "../NavTabs";
 import Todo from "../../components/Todo/App";
 
 function Home() {
@@ -37,13 +37,14 @@ function Home() {
           <Button variant="flat" size="xxl">Learn more</Button>
         </p>
       </Jumbotron>
-      <section class="section section-icons grey lighten-4 center">
+      <section style= {{backgroundColor: '#f4f4f4'}} class="section section-icons grey lighten-4 center">
         <Container>
           <Row>
             <Col>
 
               <Card style={{ paddingTop: '15px', height: '100%' }}>
                 {/* <MDBIcon style={{ textAlign: 'center' }} fab icon="amazon" size="5x" /> */}
+
                 <Card.Body>
                   <Card.Title>We've got what you need!</Card.Title>
                   <Card.Text>
@@ -153,7 +154,7 @@ function Home() {
 
         </Container>
       </section>
-      <section>
+      <section  style= {{backgroundColor: '#f4f4f4'}}>
         <Container>
 
           <Row>
