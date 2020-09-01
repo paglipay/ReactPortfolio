@@ -3,6 +3,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+
+const server = require('http').Server(app)
+const io = require("socket.io")(server)
+
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -22,3 +26,31 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglis
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
+
+// io.on('connection', socket => {
+//   console.log('user connected')
+//   socket.emit('message', {manny: 'HI'})
+//   socket.on('another event', data => {
+//     console.log(data)
+//   })
+// })
+
+let interval;
+
+io.on("connection", (socket) => {
+  console.log("New client connected");
+  if (interval) {
+    clearInterval(interval);
+  }
+  interval = setInterval(() => getApiAndEmit(socket), 1000);
+  socket.on("disconnect", () => {
+    console.log("Client disconnected");
+    clearInterval(interval);
+  });
+});
+
+const getApiAndEmit = socket => {
+  const response = new Date();
+  // Emitting a new message. Will be consumed by the client
+  socket.emit("FromAPI", response);
+};
