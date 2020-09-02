@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import "../styles/DataBody.css";
 import DataAreaContext from "../utils/DataAreaContext";
+import {Button} from 'react-bootstrap';
+
 
 const DataBody = () => {
   const context = useContext(DataAreaContext);
@@ -40,7 +42,8 @@ const DataBody = () => {
                 </a>
               </td>
               <td data-th="DOB" className="align-middle">
-                {formatDate(dob.date)}
+                {/* {formatDate(dob.date)} */}
+
               </td>
             </tr>
           );

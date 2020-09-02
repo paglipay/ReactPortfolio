@@ -97,6 +97,7 @@ const DataArea = () => {
       setDeveloperState({
         ...developerState,
         users: results.data.results,
+        users: results.data.results,
         filteredUsers: results.data.results
       });
     });

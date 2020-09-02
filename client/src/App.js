@@ -10,7 +10,7 @@ import BookSearch from "./components/BookSearch/pages/Books";
 import Detail from "./components/BookSearch/pages/Detail";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import ModalPage from "./components/MDB/ModalPage/ModalPage";
-import VideoChat from "./components/VideoChat";
+import LobbyLogin from "./components/LobbyLogin";
 import Footer from "./components/Footer";
 
 
@@ -28,11 +28,12 @@ function App() {
         <Route path="/todo" component={Todo} />
         <Route path="/modalpage" component={ModalPage} />
         <Route path="/booksearch" component={BookSearch} />
+        <Route path="/lobbylogin" component={LobbyLogin} />
         <Route exact path="/books/:id">
           <Detail />
         </Route>
         <Route path="/employeedirectory" component={EmployeeDirectory} />
-        <VideoChat />
+
         <Footer />
       </>
       {/* </ThemeProvider> */}
