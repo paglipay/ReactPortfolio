@@ -7,6 +7,11 @@ export default function SignIn() {
   const [name, setName] = useState('');
   const [room, setRoom] = useState('');
 
+const handleJoinSubmit = () => {
+  console.log('handleJoinSubmit')
+}
+
+
   return (
     <div className="joinOuterContainer">
       <div className="joinInnerContainer">
@@ -17,7 +22,7 @@ export default function SignIn() {
         <div>
           <input placeholder="Room" className="joinInput mt-20" type="text" onChange={(event) => setRoom(event.target.value)} />
         </div>
-        <Link onClick={e => (!name || !room) ? e.preventDefault() : null} to={`/chat?name=${name}&room=${room}`}>
+        <Link onClick={e => {handleJoinSubmit()}}>
           <button className={'button mt-20'} type="submit">Sign In</button>
         </Link>
       </div>
