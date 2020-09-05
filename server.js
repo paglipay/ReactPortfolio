@@ -24,49 +24,49 @@ app.use(cors())
 // Add routes, both API and view
 app.use(routes);
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:Pa55w0rd@cluster0.ay0lz.mongodb.net/dev?retryWrites=true&w=majority");
 
 // Start the API server
-server.listen(PORT, function() {
+server.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
+const users = {};
 
 io.on('connection', (socket) => {
-  // socket.on('join', (data) => {
-  //     console.log(data)
-  //     socket.join(data.room);
-  //     io.in(data.room).emit('message', `New user ${data.name} joined ${data.room} room!`);
-  // })
+  if (!users[socket.id]) {
+    users[socket.id] = socket.id;
+  }
+  socket.emit("yourID", socket.id);
+  io.sockets.emit("allUsers", users);
+  socket.on('disconnect', () => {
+    delete users[socket.id];
+    io.sockets.emit("userDisconnect", users);
+  })
 
-  // socket.on('message', (data) => {
-  //     console.log(`message: ${data.msg}`);
-  //     io.in(data.room).emit('message', data.msg);
-  // });
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit('hey', { signal: data.signalData, from: data.from });
+  })
 
-  // socket.on('call', (data) => {
-  //     console.log(`message: ${data.msg}`);
-  //     io.in(data.room).emit('call', data.msg);
-  // });
-
-  // socket.on('disconnect', () => {
-  //     console.log('user disconnected');
-  //     io.emit('message', 'user disconnected');
-  // })
+  socket.on("acceptCall", (data) => {
+    io.to(data.to).emit('callAccepted', data.signal);
+  })
 
 
+  
   socket.on('join', ({ name, room }, callback) => {
+
     const { error, user } = addUser({ id: socket.id, name, room });
 
-    if(error) return callback(error);
+    if (error) return callback(error);
 
     socket.join(user.room);
 
-    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.`});
-    // socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
+    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to room ${user.room}.` });
+    socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name} has joined!` });
 
-    // io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+    io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
 
     callback();
   });
@@ -79,4 +79,15 @@ io.on('connection', (socket) => {
 
     callback();
   });
+
+  socket.on('disconnect', () => {
+    delete users[socket.id];
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit('message', { user: 'Admin', text: `${user.name} has left.` });
+      io.to(user.room).emit('roomData', { room: user.room, users: getUsersInRoom(user.room) });
+    }
+  })
+
 })

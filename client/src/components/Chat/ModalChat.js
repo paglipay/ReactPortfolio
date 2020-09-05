@@ -3,10 +3,10 @@ import { Modal, Button, Spinner } from 'react-bootstrap';
 import io from "socket.io-client";
 import queryString from 'query-string';
 
-// import Messages from '../Chat/components/Messages/Messages';
-// import Input from '../Chat/components/Input/Input';
-// import InfoBar from '../Chat/components/InfoBar/InfoBar';
-// import Join from '../Chat/components/Join/Join';
+import Messages from '../Chat/components/Messages/Messages';
+import Input from '../Chat/components/Input/Input';
+import InfoBar from '../Chat/components/InfoBar/InfoBar';
+import Join from '../Chat/components/Join/Join';
 
 // import ReactVideoChat from "../ReactVideoChat/App";
 
@@ -77,7 +77,7 @@ function MyVerticallyCenteredModal(props) {
                 {/* <ReactVideoChat /> */}
             {/* <InfoBar room={room} /> */}
                 {/* <Spinner animation="border" variant="primary" /> */}
-                {/* {!name &&
+                {!name &&
                 <>
                 <Join />
                 </>
@@ -88,7 +88,7 @@ function MyVerticallyCenteredModal(props) {
                 <br />
                 <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
                 </>
-                } */}
+                }
 
 
             </Modal.Body>
@@ -116,7 +116,7 @@ export default function VideoChat() {
                 `}
             </style>
             <Button variant="primary" onClick={() => setModalShow(true)}>
-                Video Chat
+            Chat
         </Button>
 
             <MyVerticallyCenteredModal

@@ -20,7 +20,9 @@ function NavTabs() {
           <Nav.Link href="/modalpage">Application</Nav.Link>
           <Nav.Link href="/booksearch">Book Search</Nav.Link>
           <Nav.Link href="/employeedirectory">Directory</Nav.Link>
-          <Nav.Link href="/lobbylogin">lobbylogin</Nav.Link>
+          <Nav.Link href="/lobbylogin">LobbyLogin</Nav.Link>
+          <Nav.Link href="/videochat">Video Chat</Nav.Link>
+          <Nav.Link href="/chat">Chat</Nav.Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

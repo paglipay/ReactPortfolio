@@ -11,6 +11,8 @@ import Detail from "./components/BookSearch/pages/Detail";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import ModalPage from "./components/MDB/ModalPage/ModalPage";
 import LobbyLogin from "./components/LobbyLogin";
+import VideoChat from "./components/ReactVideoChat/App";
+import Chat from "./components/Chat";
 import Footer from "./components/Footer";
 
 
@@ -29,6 +31,8 @@ function App() {
         <Route path="/modalpage" component={ModalPage} />
         <Route path="/booksearch" component={BookSearch} />
         <Route path="/lobbylogin" component={LobbyLogin} />
+        <Route path="/videochat" component={VideoChat} />
+        <Route path="/chat" component={Chat} />
         <Route exact path="/books/:id">
           <Detail />
         </Route>

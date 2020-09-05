@@ -29,7 +29,8 @@ function Books() {
   // Deletes a book from the database with a given id, then reloads books from the db
   function deleteBook(id) {
     API.deleteBook(id)
-      .then(res => loadBooks())
+      .then(res => {loadBooks()
+      })
       .catch(err => console.log(err));
   }
 
@@ -49,7 +50,9 @@ function Books() {
         author: formObject.author,
         synopsis: formObject.synopsis
       })
-        .then(res => loadBooks())
+        .then(res => {loadBooks()        
+          setFormObject({...formObject, title: ''})
+        })
         .catch(err => console.log(err));
     }
   };

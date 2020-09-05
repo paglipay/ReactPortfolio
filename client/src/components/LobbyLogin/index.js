@@ -4,13 +4,13 @@ import { Modal, Button, Tab, Col, Row, Nav, Container, Form, Card } from 'react-
 // import Todo from "../../Todo/App";
 import EmployeeDirectory from "../EmployeeDirectory/App";
 import VideoChat from "../VideoChat";
-
+import ModalChat from "../Chat/ModalChat";
+import ReactVideoChat from "../ReactVideoChat/App";
 function ModalPage() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
     return (
         <Container>
             <style type="text/css">
@@ -105,29 +105,22 @@ function ModalPage() {
                             <Col sm={10}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="first">
+
                                         <Form>
                                             <Form.Group controlId="formBasicEmail">
-                                                <Form.Label>Email address</Form.Label>
-                                                <Form.Control type="email" placeholder="Enter email" />
-                                                <Form.Text className="text-muted">
-                                                    We'll never share your email with anyone else.
+                                                <Form.Label>Full Name</Form.Label>
+                                                <Form.Control type="text" placeholder="Enter full name" />
+                                                <Form.Text className="text-muted">                                    
                                             </Form.Text>
-                                            </Form.Group>
-
-                                            <Form.Group controlId="formBasicPassword">
-                                                <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" placeholder="Password" />
-                                            </Form.Group>
-                                            <Form.Group controlId="formBasicCheckbox">
-                                                <Form.Check type="checkbox" label="Check me out" />
                                             </Form.Group>
                                             <Button variant="primary" type="submit">
                                                 Submit
                                             </Button>
                                         </Form>
                                     </Tab.Pane>
-                                    <Tab.Pane eventKey="second">
-                                        <VideoChat />
+                                    <Tab.Pane eventKey="second">                                        
+                                    <ModalChat />                          
+                                        <ReactVideoChat />
                                         <EmployeeDirectory/>
                                     </Tab.Pane>
                                 </Tab.Content>
