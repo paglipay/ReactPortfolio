@@ -18,8 +18,8 @@ const Row = styled.div`
 
 const Video = styled.video`
   border: 1px solid blue;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
 `;
 
 function App() {
@@ -54,6 +54,7 @@ function App() {
       console.log('userDisconnect: ', users)
       console.log(users)
       setUsers(users);
+      setCallAccepted(false)
     })
 
     socket.current.on("hey", (data) => {
@@ -70,18 +71,18 @@ function App() {
       config: {
 
         iceServers: [
-            {
-                urls: "stun:numb.viagenie.ca",
-                username: "sultan1640@gmail.com",
-                credential: "98376683"
-            },
-            {
-                urls: "turn:numb.viagenie.ca",
-                username: "sultan1640@gmail.com",
-                credential: "98376683"
-            }
+          {
+            urls: "stun:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683"
+          },
+          {
+            urls: "turn:numb.viagenie.ca",
+            username: "sultan1640@gmail.com",
+            credential: "98376683"
+          }
         ]
-    },
+      },
       stream: stream,
     });
 
@@ -98,6 +99,7 @@ function App() {
     socket.current.on("callAccepted", signal => {
       setCallAccepted(true);
       peer.signal(signal);
+      setReceivingCall(false)
     })
 
   }
@@ -109,6 +111,7 @@ function App() {
       trickle: false,
       stream: stream,
     });
+
     peer.on("signal", data => {
       socket.current.emit("acceptCall", { signal: data, to: caller })
     })
@@ -133,6 +136,9 @@ function App() {
       <Video playsInline ref={partnerVideo} autoPlay />
     );
   }
+  else{
+    PartnerVideo = null
+  }
 
   let incomingCall;
   if (receivingCall) {
@@ -146,7 +152,7 @@ function App() {
   return (
     <Container>
       <Row>
-        {UserVideo}
+        {/* {UserVideo} */}
         {PartnerVideo}
       </Row>
       <Row>

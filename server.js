@@ -1,11 +1,10 @@
 const express = require("express");
 
+const path = require('path');
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const cors = require('cors')
-
-
 
 const server = require('http').Server(app)
 const io = require("socket.io")(server)
@@ -15,6 +14,7 @@ const PORT = process.env.PORT || 3001;
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(cors())
 // Add routes, both API and view
 app.use(routes);
+
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://user1:Pa55w0rd@cluster0.ay0lz.mongodb.net/dev?retryWrites=true&w=majority");
 
@@ -35,11 +36,13 @@ const { addUser, removeUser, getUser, getUsersInRoom } = require('./users');
 const users = {};
 
 io.on('connection', (socket) => {
+
   if (!users[socket.id]) {
     users[socket.id] = socket.id;
   }
   socket.emit("yourID", socket.id);
   io.sockets.emit("allUsers", users);
+  
   socket.on('disconnect', () => {
     delete users[socket.id];
     io.sockets.emit("userDisconnect", users);
@@ -81,7 +84,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    delete users[socket.id];
+    // delete users[socket.id];
     const user = removeUser(socket.id);
 
     if (user) {

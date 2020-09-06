@@ -14,6 +14,8 @@ import LobbyLogin from "./components/LobbyLogin";
 import VideoChat from "./components/ReactVideoChat/App";
 import Chat from "./components/Chat";
 import Footer from "./components/Footer";
+import Signup from "./components/Users/Signup";
+import Login from "./components/Users/Login";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
         {/* <GlobalStyles /> */}
         <NavTabs />
         <Route exact path="/" component={Home} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />

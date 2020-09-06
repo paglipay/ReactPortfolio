@@ -37,7 +37,7 @@ function Home() {
           <Button variant="flat" size="xxl">Learn more</Button>
         </p>
       </Jumbotron>
-      <section class="section section-icons grey lighten-4 center">
+      <section className="section section-icons grey lighten-4 center">
         <Container>
           <Row>
             <Col>
@@ -120,7 +120,7 @@ function Home() {
 
         </Container>
       </section>
-      <section class="section section-icons grey lighten-4 center">
+      <section className="section section-icons grey lighten-4 center">
         <Container>
 
           <Row>

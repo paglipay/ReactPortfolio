@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
+import Login from "./Users/LoginModal";
+
 function NavTabs() {
   // We'll go into the Hooks API later, for now, we are just using some code
   // from the react-router docs (https://reacttraining.com/react-router/web/api/Hooks/uselocation)
@@ -9,7 +11,7 @@ function NavTabs() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" className="mb-sm-3">
         <Navbar.Brand href="/">Paul Aglipay</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
@@ -26,7 +28,9 @@ function NavTabs() {
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info">Search</Button>
+          <Button variant="outline-info" className="mr-sm-2" >Search</Button>
+          
+          <Login />
         </Form>
       </Navbar>
       

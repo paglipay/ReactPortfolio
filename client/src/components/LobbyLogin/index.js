@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Tab, Col, Row, Nav, Container, Form, Card } from 'react-bootstrap';
-
+import QRCode from "react-qr-code";
 // import Todo from "../../Todo/App";
 import EmployeeDirectory from "../EmployeeDirectory/App";
 import VideoChat from "../VideoChat";
@@ -36,15 +36,13 @@ function ModalPage() {
 
             <Row >
                 <Col>
-
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
                         <i class="large material-icons divicon">directions_car</i>
                         <Card.Body>
-                            <Card.Title>We've got what you need!</Card.Title>
+                            <Card.Title>Let's Get In Touch!</Card.Title>
                             <Card.Text>
                                 Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
                             </Card.Text>
-
                             <Button variant="primary" onClick={handleShow}>
                                 Start
                             </Button>
@@ -68,17 +66,15 @@ function ModalPage() {
                     </Card>
                 </Col>
                 <Col>
-                    <Card style={{ paddingTop: '15px', height: '100%' }}>
+                    <Card style={{ paddingTop: '15px', height: '100%' }} float="center">
                         {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
                         <Card.Body>
-                            <Card.Title>Let's Get In Touch!</Card.Title>
+                            <Card.Title>Go Touchless!</Card.Title>
                             <Card.Text>
                                 Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                             </Card.Text>
+                            <QRCode value="https://paglipay-reactportfolio.herokuapp.com/" />
 
-                            <Button variant="primary" onClick={handleShow}>
-                                Start
-                            </Button>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -105,23 +101,34 @@ function ModalPage() {
                             <Col sm={10}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="first">
-
-                                        <Form>
-                                            <Form.Group controlId="formBasicEmail">
-                                                <Form.Label>Full Name</Form.Label>
-                                                <Form.Control type="text" placeholder="Enter full name" />
-                                                <Form.Text className="text-muted">                                    
-                                            </Form.Text>
-                                            </Form.Group>
-                                            <Button variant="primary" type="submit">
-                                                Submit
-                                            </Button>
-                                        </Form>
+                                        <Row>
+                                            <Col>
+                                                <Form>
+                                                    <Form.Group controlId="formBasicEmail">
+                                                        <Form.Label>Full Name</Form.Label>
+                                                        <Form.Control type="text" placeholder="Enter full name" />
+                                                        <Form.Text className="text-muted">
+                                                        </Form.Text>
+                                                    </Form.Group>
+                                                    <Button variant="primary" type="submit">
+                                                        Submit
+                                                    </Button>
+                                                </Form>
+                                                
+                                        <EmployeeDirectory />
+                                            </Col>
+                                            <Col>
+                                                <Card>
+                                                    <Card.Header>Featured</Card.Header>
+                                                    <Card.Body>
+                                                        <ReactVideoChat />
+                                                    </Card.Body>
+                                                </Card>
+                                            </Col>
+                                        </Row>
                                     </Tab.Pane>
-                                    <Tab.Pane eventKey="second">                                        
-                                    <ModalChat />                          
-                                        <ReactVideoChat />
-                                        <EmployeeDirectory/>
+                                    <Tab.Pane eventKey="second">
+                                        <ModalChat />
                                     </Tab.Pane>
                                 </Tab.Content>
                             </Col>
