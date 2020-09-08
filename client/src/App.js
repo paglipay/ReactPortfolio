@@ -16,6 +16,7 @@ import Chat from "./components/Chat";
 import Footer from "./components/Footer";
 import Signup from "./components/Users/Signup";
 import Login from "./components/Users/Login";
+import TouchlessLogin from "./components/TouchlessLogin";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/login" component={Login} />
+        <Route exact path="/touchlesslogin" component={TouchlessLogin} />
         <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} />

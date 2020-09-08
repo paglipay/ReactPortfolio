@@ -136,9 +136,6 @@ function App() {
       <Video playsInline ref={partnerVideo} autoPlay />
     );
   }
-  else{
-    PartnerVideo = null
-  }
 
   let incomingCall;
   if (receivingCall) {

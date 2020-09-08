@@ -26,10 +26,7 @@ function NavTabs() {
           <Nav.Link href="/videochat">Video Chat</Nav.Link>
           <Nav.Link href="/chat">Chat</Nav.Link>
         </Nav>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-info" className="mr-sm-2" >Search</Button>
-          
+        <Form inline>          
           <Login />
         </Form>
       </Navbar>

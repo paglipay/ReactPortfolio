@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Button, Tab, Col, Row, Nav, Container, Form, Card } from 'react-bootstrap';
 import QRCode from "react-qr-code";
 // import Todo from "../../Todo/App";
@@ -6,11 +6,73 @@ import EmployeeDirectory from "../EmployeeDirectory/App";
 import VideoChat from "../VideoChat";
 import ModalChat from "../Chat/ModalChat";
 import ReactVideoChat from "../ReactVideoChat/App";
+
+import io from "socket.io-client";
+
 function ModalPage() {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [yourID, setYourID] = useState("");
+    const [users, setUsers] = useState({});
+    const [stream, setStream] = useState();
+    const [receivingCall, setReceivingCall] = useState(false);
+    const [caller, setCaller] = useState("");
+    const [callerSignal, setCallerSignal] = useState();
+    const [callAccepted, setCallAccepted] = useState(false);
+    const [state, setState] = useState(0)
+    const [receivingQR, setReceivingQR] = useState(false);
+
+    const socket = useRef();
+
+    useEffect(() => {
+        socket.current = io.connect("/");
+        
+        // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        //   setStream(stream);
+        //   if (userVideo.current) {
+        //     userVideo.current.srcObject = stream;
+        //   }
+        // })
+
+        // socket.current.on("yourID", (id) => {
+        //     setYourID(id);
+        // })
+        
+        socket.current.on("allUsers", (users) => {
+            console.log('allUsers', users)
+            setState(Math.floor(Math.random() * 1000))
+            console.log('count', state)
+            
+        })
+        socket.current.on("userDisconnect", (users) => {
+            console.log('userDisconnect: ', users)
+            // console.log(users)
+            // setUsers(users);
+            // setCallAccepted(false)
+        })
+
+        socket.current.on("hey", (data) => {
+            setReceivingQR(true)
+            // setReceivingCall(true);
+            // setCaller(data.from);
+            // setCallerSignal(data.signal);
+        })
+    }, []);
+    
+    useEffect(() => {
+        console.log(state)
+    }, [state]);
+
+    useEffect(() => {
+        console.log('receivingQR', receivingQR)
+    }, [receivingQR]);
+
+    const cntBtnHandle = () => setState(Math.floor(Math.random() * 1000))
+
+
     return (
         <Container>
             <style type="text/css">
@@ -37,7 +99,7 @@ function ModalPage() {
             <Row >
                 <Col>
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
-                        <i class="large material-icons divicon">directions_car</i>
+                        <i className="large material-icons divicon">directions_car</i>
                         <Card.Body>
                             <Card.Title>Let's Get In Touch!</Card.Title>
                             <Card.Text>
@@ -45,6 +107,9 @@ function ModalPage() {
                             </Card.Text>
                             <Button variant="primary" onClick={handleShow}>
                                 Start
+                            </Button>
+                            <Button variant="primary" onClick={cntBtnHandle}>
+                                Count
                             </Button>
                         </Card.Body>
                     </Card>
@@ -73,7 +138,7 @@ function ModalPage() {
                             <Card.Text>
                                 Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                             </Card.Text>
-                            <QRCode value="https://paglipay-reactportfolio.herokuapp.com/" />
+                            <QRCode value={`https://paglipay-reactportfolio.herokuapp.com/lobbylogin/${state}` } />
 
                         </Card.Body>
                     </Card>
@@ -114,8 +179,8 @@ function ModalPage() {
                                                         Submit
                                                     </Button>
                                                 </Form>
-                                                
-                                        <EmployeeDirectory />
+
+                                                <EmployeeDirectory />
                                             </Col>
                                             <Col>
                                                 <Card>
