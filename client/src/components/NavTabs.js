@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Button, Form, FormControl } from 'react-bootstrap';
 import Login from "./Users/LoginModal";
 
 function NavTabs() {
@@ -12,25 +12,28 @@ function NavTabs() {
   return (
     <>
       <Navbar bg="dark" variant="dark" className="mb-sm-3">
-        <Navbar.Brand href="/">Paul Aglipay</Navbar.Brand>
+        <Navbar.Brand href="/">LL</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/about">About</Nav.Link>
-          <Nav.Link href="/blog">Blog</Nav.Link>
-          <Nav.Link href="/todo">Todo</Nav.Link>
-          <Nav.Link href="/admin">Admin</Nav.Link>
-          <Nav.Link href="/modalpage">Application</Nav.Link>
-          <Nav.Link href="/booksearch">Book Search</Nav.Link>
-          <Nav.Link href="/employeedirectory">Directory</Nav.Link>
+          {/* <Nav.Link href="/about">About</Nav.Link>
+          <Nav.Link href="/blog">Blog</Nav.Link> */}
           <Nav.Link href="/lobbylogin">LobbyLogin</Nav.Link>
-          <Nav.Link href="/videochat">Video Chat</Nav.Link>
-          <Nav.Link href="/chat">Chat</Nav.Link>
+          <NavDropdown title="Components" id="collasible-nav-dropdown">
+            <NavDropdown.Item href="/admin">Admin</NavDropdown.Item>
+            <NavDropdown.Item href="/modalpage">Application</NavDropdown.Item>
+            <NavDropdown.Item href="/booksearch">Book Search</NavDropdown.Item>
+            <NavDropdown.Item href="/todo">Todo</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/employeedirectory">Directory</NavDropdown.Item>
+            <NavDropdown.Item href="/videochat">Video Chat</NavDropdown.Item>
+            <NavDropdown.Item href="/chat">Chat</NavDropdown.Item>
+          </NavDropdown>
         </Nav>
-        <Form inline>          
+        <Form inline>
           <Login />
         </Form>
       </Navbar>
-      
+
     </>
   );
 }

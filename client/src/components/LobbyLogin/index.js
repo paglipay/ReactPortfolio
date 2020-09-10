@@ -6,10 +6,11 @@ import EmployeeDirectory from "../EmployeeDirectory/App";
 import VideoChat from "../VideoChat";
 import ModalChat from "../Chat/ModalChat";
 import ReactVideoChat from "../ReactVideoChat/App";
-
+import API from "../../utils/API";
+import AvailableTimes from "../AvailableTimes";
 import io from "socket.io-client";
 
-function ModalPage() {
+function ModalPage(props) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -26,10 +27,32 @@ function ModalPage() {
     const [receivingQR, setReceivingQR] = useState(false);
 
     const socket = useRef();
+    const [datepickerDisabled, setDatepickerDisabled] = useState(false)
+    const [availableTimesList, setavailableTimesList] = useState([])    
+    const [formObject, setFormObject] = useState({})
 
+    
+    useEffect(() => {
+        console.log('props.match.params.id: ' + props.match.params.id)
+      }, [])
+
+    // Handles updating component state when the user types into the input field
+    function handleInputChange(event) {
+        const { name, value } = event.target;
+        console.log(name, value)
+        setDatepickerDisabled(false)
+        if (name === 'date') {
+            API.getAvailableTimes(value)
+                .then(res => setavailableTimesList(res.data))
+                .catch(err => console.log(err));
+            // setavailableTimesList(['1:00pm', '1:15pm'])
+        }
+        setFormObject({ ...formObject, [name]: value })
+
+    };
     useEffect(() => {
         socket.current = io.connect("/");
-        
+
         // navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
         //   setStream(stream);
         //   if (userVideo.current) {
@@ -40,12 +63,12 @@ function ModalPage() {
         // socket.current.on("yourID", (id) => {
         //     setYourID(id);
         // })
-        
+
         socket.current.on("allUsers", (users) => {
             console.log('allUsers', users)
             setState(Math.floor(Math.random() * 1000))
             console.log('count', state)
-            
+
         })
         socket.current.on("userDisconnect", (users) => {
             console.log('userDisconnect: ', users)
@@ -61,7 +84,7 @@ function ModalPage() {
             // setCallerSignal(data.signal);
         })
     }, []);
-    
+
     useEffect(() => {
         console.log(state)
     }, [state]);
@@ -101,7 +124,7 @@ function ModalPage() {
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
                         <i className="large material-icons divicon">directions_car</i>
                         <Card.Body>
-                            <Card.Title>Let's Get In Touch!</Card.Title>
+                            <Card.Title>I have an Appointment!</Card.Title>
                             <Card.Text>
                                 Knowlegable in HTML, Javascript, CSS, Nodejs, Sequelize, and much much more!!!
                             </Card.Text>
@@ -118,7 +141,7 @@ function ModalPage() {
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
                         {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" className="center" /> */}
                         <Card.Body>
-                            <Card.Title>At Your Service</Card.Title>
+                            <Card.Title>I do not have an appointment...</Card.Title>
                             <Card.Text>
                                 Some quick example text to build on the card title and make up the bulk of
                                 the card's content.
@@ -138,8 +161,9 @@ function ModalPage() {
                             <Card.Text>
                                 Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                             </Card.Text>
-                            <QRCode value={`https://paglipay-reactportfolio.herokuapp.com/lobbylogin/${state}` } />
-
+                            <a href={`/touchlesslogin/${state}`}>
+                                <QRCode value={`/touchlesslogin/${state}`} />
+                            </a>
                         </Card.Body>
                     </Card>
                 </Col>
@@ -171,7 +195,7 @@ function ModalPage() {
                                                 <Form>
                                                     <Form.Group controlId="formBasicEmail">
                                                         <Form.Label>Full Name</Form.Label>
-                                                        <Form.Control type="text" placeholder="Enter full name" />
+                                                        <Form.Control type="text" placeholder="Please Enter your Full Name" />
                                                         <Form.Text className="text-muted">
                                                         </Form.Text>
                                                     </Form.Group>
@@ -179,8 +203,10 @@ function ModalPage() {
                                                         Submit
                                                     </Button>
                                                 </Form>
-
                                                 <EmployeeDirectory />
+                                                <h1>Set up an Appointment:</h1>
+                                                <AvailableTimes datepickerDisabled={datepickerDisabled} availableTimesList={availableTimesList} handleInputChange={handleInputChange} />
+                                                
                                             </Col>
                                             <Col>
                                                 <Card>
