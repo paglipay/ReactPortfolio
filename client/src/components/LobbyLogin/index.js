@@ -72,8 +72,8 @@ function ModalPage() {
                                 Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                             </Card.Text>
 
-                            <a href={`${process.env.PUBLIC_URL}/touchlesslogin/1`}>
-                                <QRCode value={`https://paglipay-reactportfolio.herokuapp.com/touchlesslogin/1`} />
+                            <a href={`${window.location}/touchlesslogin/1`}>
+                                <QRCode value={`${window.location}/touchlesslogin/1`} />
                             </a>
                         </Card.Body>
                     </Card>
