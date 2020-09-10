@@ -25,8 +25,8 @@ function App() {
               </p>
             </article>
   
-            <a href={`${window.location}/visitorconfirm/1`}>
-              <QRCode value={`${window.location}/visitorconfirm/1`} />
+            <a href={`${window.origin}/visitorconfirm/1`}>
+              <QRCode value={`${window.origin}/visitorconfirm/1`} />
             </a>
           </Col>
         </Row>
