@@ -51,7 +51,7 @@ function App(props) {
       <br />
       <Row>
         <Col size="md-6" className="mt-5">
-          <Button variant="success" className="btn-xl">Check In</Button>
+          <Button variant="success" className="btn-xl">Check In Now!</Button>
         </Col>
       </Row>
     </Container>
