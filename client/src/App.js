@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavTabs from "./components/NavTabs";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import LobbyLogin from "./components/LobbyLogin";
-import Employees from "./components/Employees/components/pages";
+// import Employees from "./components/Employees/components/pages";
 import TouchlessLogin from "./components/TouchlessLogin";
 import VisitorConfirm from "./components/VisitorConfirm";
 import Signup from "./components/Users/Signup";
@@ -25,7 +25,7 @@ function App() {
           <Detail />
         </Route> */}
         <Route path="/employeedirectory" component={EmployeeDirectory} />
-        <Route path="/employees" component={Employees} />
+        {/* <Route path="/employees" component={Employees} /> */}
 
         {/* <Footer /> */}
       </>
