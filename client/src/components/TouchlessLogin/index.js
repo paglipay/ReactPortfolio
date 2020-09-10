@@ -103,14 +103,33 @@ function TouchlessLogin(props) {
                         <Modal.Title>Do you wish to make this appointment?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <VisitorConfirm />
+                        <p>
+                            Your appointment with: {formObject.employee}
+                            <br />
+                            Is set on: {formObject.date}
+
+                            <br />
+                            Do you wish to confirm?
+                            <br />
+                            A cofirmation email will be sent to: {formObject.email}
+                        </p>     
+                        <VisitorConfirm />              
 
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={handleClose}>
+                        <Button variant="primary" onClick={() => {
+                            handleClose();
+                            const baseurl = window.location.href
+                            console.log('baseurl: ', baseurl)
+                            if (baseurl.includes('lobbylogin')) {
+                                return null
+                            } else {
+                                window.location.replace(`${window.origin}/visitorconfirm/1`);
+                            }
+                        }}>
                             Confirm
                         </Button>
                     </Modal.Footer>
