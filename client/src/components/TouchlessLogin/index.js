@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import QRCode from "react-qr-code";
 import { Form, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import AvailableTimes from "../AvailableTimes";
-import API from "../Employees/components/utils/API";
+import API from "../../utils/API";
 import EmployeeDirectory from "../EmployeeDirectory/EmpDirModal";
 import VisitorConfirm from "../VisitorConfirm";
 
