@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import QRCode from "react-qr-code";
 import { Form, Button, Container, Row, Col, Modal } from "react-bootstrap";
 import AvailableTimes from "../AvailableTimes";
@@ -7,16 +7,25 @@ import EmployeeDirectory from "../EmployeeDirectory/EmpDirModal";
 import VisitorConfirm from "../VisitorConfirm";
 
 function TouchlessLogin(props) {
-    
+    const [appointments, setAppointments] = useState([]);
     const [show, setShow] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
     const [showEmployeeDirectory, setShowEmployeeDirectory] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleConfirmClose = () => setShowConfirm(false);
+    const handleConfirmShow = () => setShowConfirm(true);
+
 
     const [datepickerDisabled, setDatepickerDisabled] = useState(true)
     const [availableTimesList, setavailableTimesList] = useState([])
 
     const [formObject, setFormObject] = useState({})
+
+    // Load all appointments and store them with setAppointments
+    useEffect(() => {
+        setFormObject({ ...formObject, uuid_id: props.uuid_id })
+    }, [])
 
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
@@ -37,35 +46,46 @@ function TouchlessLogin(props) {
 
     };
 
+    // Loads all appointments and sets them to appointments
+    function loadAppointments() {
+        API.getAppointments()
+            .then(res => setAppointments(res.data))
+            .then(res => setShowConfirm(true))
+            .catch(err => console.log(err));
+    };
+
     // When the form is submitted, use the API.saveAppointment method to save the appointment data
     // Then reload appointments from the database
     function handleFormSubmit(event) {
         event.preventDefault();
-        // if (formObject.name && formObject.phone && formObject.email && formObject.employee && formObject.date && formObject.time && formObject.info) {
-        //   API.saveAppointments({
-        //     name: formObject.name,
-        //     phone: formObject.phone,
-        //     email: formObject.email,
-        //     employee: formObject.employee,
-        //     // datetime: formObject.datetime,
-        //     // date_time: new Date(formObject.date + ' ' + formObject.time),
-        //     date: formObject.date,
-        //     time: formObject.time,
-        //     info: formObject.info
-        //   })
-        //     .then(res => loadAppointments())
-        //     .then(() => setFormObject({
-        //       name: '',
-        //       phone: '',
-        //       email: '',
-        //       employee: '',
-        //       date:"",
-        //       time:"",
-        //       // datetime: "",
-        //       info: ''
-        //     }))
-        //     .catch(err => console.log(err));
-        // }
+        console.log(formObject)
+        setShow(false);
+
+        if (formObject.email && formObject.employee && formObject.date && formObject.time) {
+            console.log('API.saveAppointments')
+            API.saveAppointments({
+                uuid_id: formObject.uuid_id,
+                email: formObject.email,
+                employee: formObject.employee,
+                date: formObject.date,
+            })
+                .then(res => loadAppointments())
+                .then(() => setFormObject({
+                    email: '',
+                    employee: '',
+                    date: ""
+                }))
+                .catch(err => console.log(err));
+        }
+
+        const baseurl = window.location.href
+        console.log('baseurl: ', baseurl)
+        if (baseurl.includes('lobbylogin')) {
+            return null
+        } else {
+            window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
+        }
+
     };
 
 
@@ -109,24 +129,28 @@ function TouchlessLogin(props) {
                             <br />
                             A cofirmation email will be sent to: {formObject.email}
                         </p>
-                        <VisitorConfirm uuid_id={props.uuid_id} />
+                        {/* <VisitorConfirm uuid_id={props.uuid_id} /> */}
 
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Cancel
                         </Button>
-                        <Button variant="primary" onClick={() => {
-                            handleClose();
-                            const baseurl = window.location.href
-                            console.log('baseurl: ', baseurl)
-                            if (baseurl.includes('lobbylogin')) {
-                                return null
-                            } else {
-                                window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
-                            }
-                        }}>
+                        <Button variant="primary" onClick={handleFormSubmit}>
                             Confirm
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={showConfirm} onHide={handleConfirmClose} centered>
+                    <Modal.Header closeButton>
+                        <Modal.Title>YOur appointment has been submitted.</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <VisitorConfirm uuid_id={props.uuid_id} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleConfirmClose}>
+                            Cancel
                         </Button>
                     </Modal.Footer>
                 </Modal>

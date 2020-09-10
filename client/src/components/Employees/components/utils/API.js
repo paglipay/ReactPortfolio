@@ -1,10 +1,6 @@
 import axios from "axios";
 
 export default {
-  // Gets all users
-  getUsers: function() {
-    return axios.get("https://randomuser.me/api/?results=200&nat=us");
-  },
   // Gets all appointments
   getAppointments: function() {
     return axios.get("/api/appointments");
@@ -24,5 +20,9 @@ export default {
   },
   getAvailableTimes: function(date) {
     return axios.get(`/api/appointments/availabletimes/${date}`);
+  },
+  getUsers: function() {
+
+    return axios.get("https://randomuser.me/api/?results=200&nat=us");
   }
 };
