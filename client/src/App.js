@@ -4,8 +4,8 @@ import NavTabs from "./components/NavTabs";
 import EmployeeDirectory from "./components/EmployeeDirectory/App";
 import LobbyLogin from "./components/LobbyLogin";
 // import Employees from "./components/Employees/components/pages";
-import TouchlessLogin from "./components/TouchlessLogin";
-import VisitorConfirm from "./components/VisitorConfirm";
+import TouchlessLoginUrl from "./components/TouchlessLogin/TouchlessLoginUrl";
+import VisitorUrl from "./components/VisitorConfirm/VisitorUrl";
 import Signup from "./components/Users/Signup";
 import Home from "./components/pages/Home";
 function App() {
@@ -17,8 +17,8 @@ function App() {
         <NavTabs />
         <Route exact path="/" component={Home} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/visitorconfirm/:id" component={VisitorConfirm} />
-        <Route exact path="/touchlesslogin/:id" component={TouchlessLogin} />
+        <Route exact path="/visitorconfirm/:id" component={VisitorUrl} />
+        <Route exact path="/touchlesslogin/:id" component={TouchlessLoginUrl} />
         <Route path="/lobbylogin" component={LobbyLogin} />
         {/* <Route path="/videochat" component={VideoChat} />
         <Route exact path="/books/:id">

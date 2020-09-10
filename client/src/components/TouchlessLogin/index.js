@@ -7,6 +7,7 @@ import EmployeeDirectory from "../EmployeeDirectory/EmpDirModal";
 import VisitorConfirm from "../VisitorConfirm";
 
 function TouchlessLogin(props) {
+    
     const [show, setShow] = useState(false);
     const [showEmployeeDirectory, setShowEmployeeDirectory] = useState(false);
     const handleClose = () => setShow(false);
@@ -16,11 +17,6 @@ function TouchlessLogin(props) {
     const [availableTimesList, setavailableTimesList] = useState([])
 
     const [formObject, setFormObject] = useState({})
-
-
-    useEffect(() => {
-        // console.log('props.match.params.id: ' + props.match.params.id)
-    }, [])
 
     // Handles updating component state when the user types into the input field
     function handleInputChange(event) {
@@ -43,34 +39,34 @@ function TouchlessLogin(props) {
 
     // When the form is submitted, use the API.saveAppointment method to save the appointment data
     // Then reload appointments from the database
-    //   function handleFormSubmit(event) {
-    //     event.preventDefault();
-    //     if (formObject.name && formObject.phone && formObject.email && formObject.employee && formObject.date && formObject.time && formObject.info) {
-    //       API.saveAppointments({
-    //         name: formObject.name,
-    //         phone: formObject.phone,
-    //         email: formObject.email,
-    //         employee: formObject.employee,
-    //         // datetime: formObject.datetime,
-    //         // date_time: new Date(formObject.date + ' ' + formObject.time),
-    //         date: formObject.date,
-    //         time: formObject.time,
-    //         info: formObject.info
-    //       })
-    //         .then(res => loadAppointments())
-    //         .then(() => setFormObject({
-    //           name: '',
-    //           phone: '',
-    //           email: '',
-    //           employee: '',
-    //           date:"",
-    //           time:"",
-    //           // datetime: "",
-    //           info: ''
-    //         }))
-    //         .catch(err => console.log(err));
-    //     }
-    //   };
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        // if (formObject.name && formObject.phone && formObject.email && formObject.employee && formObject.date && formObject.time && formObject.info) {
+        //   API.saveAppointments({
+        //     name: formObject.name,
+        //     phone: formObject.phone,
+        //     email: formObject.email,
+        //     employee: formObject.employee,
+        //     // datetime: formObject.datetime,
+        //     // date_time: new Date(formObject.date + ' ' + formObject.time),
+        //     date: formObject.date,
+        //     time: formObject.time,
+        //     info: formObject.info
+        //   })
+        //     .then(res => loadAppointments())
+        //     .then(() => setFormObject({
+        //       name: '',
+        //       phone: '',
+        //       email: '',
+        //       employee: '',
+        //       date:"",
+        //       time:"",
+        //       // datetime: "",
+        //       info: ''
+        //     }))
+        //     .catch(err => console.log(err));
+        // }
+    };
 
 
     return (
@@ -78,6 +74,7 @@ function TouchlessLogin(props) {
             <Container>
                 <Row>
                     <Col>
+                        <h1>UUID:{`${props.uuid_id}`}</h1>
                         <Form>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
@@ -107,13 +104,12 @@ function TouchlessLogin(props) {
                             Your appointment with: {formObject.employee}
                             <br />
                             Is set on: {formObject.date}
-
                             <br />
                             Do you wish to confirm?
                             <br />
                             A cofirmation email will be sent to: {formObject.email}
-                        </p>     
-                        <VisitorConfirm />              
+                        </p>
+                        <VisitorConfirm uuid_id={props.uuid_id} />
 
                     </Modal.Body>
                     <Modal.Footer>
@@ -127,7 +123,7 @@ function TouchlessLogin(props) {
                             if (baseurl.includes('lobbylogin')) {
                                 return null
                             } else {
-                                window.location.replace(`${window.origin}/visitorconfirm/1`);
+                                window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
                             }
                         }}>
                             Confirm

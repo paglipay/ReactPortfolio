@@ -4,7 +4,7 @@ import VideoChat from "../../../VideoChat";
 import EmployeeDirectory from "../../../EmployeeDirectory/App";
 import TouchlessLogin from "../../../TouchlessLogin";
 
-export default function index({ show, handleClose }) {
+export default function index({ show, handleClose, uuid_id }) {
     return (
         <>
             <Modal show={show} onHide={handleClose} dialogClassName="modal-90w" >
@@ -33,7 +33,7 @@ export default function index({ show, handleClose }) {
                             <Col sm={10}>
                                 <Tab.Content>
                                     <Tab.Pane eventKey="first">
-                                        <TouchlessLogin />
+                                        <TouchlessLogin uuid_id={uuid_id}/>
                                     </Tab.Pane>
                                     <Tab.Pane eventKey="second">
                                     </Tab.Pane>
