@@ -73,7 +73,7 @@ function ModalPage() {
                             </Card.Text>
 
                             <a href={`${process.env.PUBLIC_URL}/touchlesslogin/1`}>
-                                <QRCode value={`${process.env.PUBLIC_URL}/touchlesslogin/1`} />
+                                <QRCode value={`https://paglipay-reactportfolio.herokuapp.com/touchlesslogin/1`} />
                             </a>
                         </Card.Body>
                     </Card>

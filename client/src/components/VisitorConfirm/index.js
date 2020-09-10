@@ -25,8 +25,8 @@ function App() {
               </p>
             </article>
   
-            <a href={`/visitorconfirm/1`}>
-              <QRCode value={`/visitorconfirm/1`} />
+            <a href={`${process.env.PUBLIC_URL}/visitorconfirm/1`}>
+              <QRCode value={`https://paglipay-reactportfolio.herokuapp.com/visitorconfirm/1`} />
             </a>
           </Col>
         </Row>
