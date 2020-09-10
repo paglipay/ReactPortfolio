@@ -25,8 +25,8 @@ function App() {
               </p>
             </article>
   
-            <a href={`/touchlesslogin/`}>
-              <QRCode value={`/touchlesslogin/`} />
+            <a href={`/visitorconfirm/1`}>
+              <QRCode value={`/visitorconfirm/1`} />
             </a>
           </Col>
         </Row>
