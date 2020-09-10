@@ -25,7 +25,6 @@ function ModalPage() {
         })
         socket.current.on("allUsers", (users) => {
             setUsers(users);
-
             setUuid_id(uuidv4())
             console.log('users:', users)
         })
