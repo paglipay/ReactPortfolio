@@ -74,7 +74,6 @@ function ModalPage() {
                 </Col>
                 <Col>
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
-                        {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" className="center" /> */}
                         <Card.Body>
                             <Card.Title>I do not have an appointment...</Card.Title>
                             <Card.Text>
@@ -90,7 +89,6 @@ function ModalPage() {
                 </Col>
                 <Col>
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
-                        {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
                         <Card.Body>
                             <Card.Title>Let's Get In Touch!</Card.Title>
                             <Card.Text>
@@ -106,7 +104,7 @@ function ModalPage() {
                 </Col>
             </Row>
 
-            <LLModal show={show} handleClose={handleClose} uuid_id={uuid_id} />
+            <LLModal show={show} setShow={setShow} handleClose={handleClose} uuid_id={uuid_id} />
         </Container >
     );
 }

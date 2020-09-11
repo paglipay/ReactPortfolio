@@ -48,6 +48,7 @@ function TouchlessLogin(props) {
 
     // Loads all appointments and sets them to appointments
     function loadAppointments() {
+        console.log('loadAppointments')
         API.getAppointments()
             .then(res => {
                 setShowConfirm(true)
@@ -63,7 +64,7 @@ function TouchlessLogin(props) {
         console.log(formObject)
         setShow(false);
 
-        if (formObject.email && formObject.employee && formObject.date && formObject.time) {
+        // if (formObject.email && formObject.date && formObject.time) {
             console.log('API.saveAppointments')
             API.saveAppointments({
                 uuid_id: formObject.uuid_id,
@@ -78,12 +79,15 @@ function TouchlessLogin(props) {
                     date: ""
                 }))
                 .catch(err => console.log(err));
-        }
+        // }
 
         const baseurl = window.location.href
         console.log('baseurl: ', baseurl)
         if (baseurl.includes('lobbylogin')) {
-            return null
+            setTimeout(() => {
+                setShowConfirm(false);
+                props.LLsetShow(false);
+            }, 5000);
         } else {
             window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
         }
