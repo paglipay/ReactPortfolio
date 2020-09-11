@@ -49,8 +49,10 @@ function TouchlessLogin(props) {
     // Loads all appointments and sets them to appointments
     function loadAppointments() {
         API.getAppointments()
-            .then(res => setAppointments(res.data))
-            .then(res => setShowConfirm(true))
+            .then(res => {
+                setShowConfirm(true)
+                setAppointments(res.data)
+            })
             .catch(err => console.log(err));
     };
 
