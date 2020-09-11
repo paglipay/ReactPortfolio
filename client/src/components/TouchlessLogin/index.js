@@ -87,7 +87,7 @@ function TouchlessLogin(props) {
             setTimeout(() => {
                 setShowConfirm(false);
                 props.LLsetShow(false);
-            }, 5000);
+            }, 60000);
         } else {
             window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
         }
