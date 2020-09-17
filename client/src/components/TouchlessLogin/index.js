@@ -15,7 +15,7 @@ function TouchlessLogin(props) {
     const handleShow = () => setShow(true);
     const handleConfirmClose = () => setShowConfirm(false);
     const handleConfirmShow = () => setShowConfirm(true);
-
+    const [showSpinner, setShowSpinner] = useState(false)
 
     const [datepickerDisabled, setDatepickerDisabled] = useState(true)
     const [availableTimesList, setavailableTimesList] = useState([])
@@ -32,9 +32,14 @@ function TouchlessLogin(props) {
         const { name, value } = event.target;
         console.log(name, value)
         setDatepickerDisabled(false)
-        if (name === 'date') {
+        if (name === 'date') {            
+            setavailableTimesList([])
+            setShowSpinner(true)
             API.getAvailableTimes(value)
-                .then(res => setavailableTimesList(res.data))
+                .then(res => {
+                    setavailableTimesList(res.data)
+                    setShowSpinner(false)
+                })
                 .catch(err => console.log(err));
             // setavailableTimesList(['1:00pm', '1:15pm'])
         }
@@ -51,8 +56,19 @@ function TouchlessLogin(props) {
         console.log('loadAppointments')
         API.getAppointments()
             .then(res => {
-                setShowConfirm(true)
                 setAppointments(res.data)
+
+                const baseurl = window.location.href
+                console.log('baseurl: ', baseurl)
+                if (baseurl.includes('lobbylogin')) {
+                    setShowConfirm(true)
+                    setTimeout(() => {
+                        setShowConfirm(false);
+                        props.LLsetShow(false);
+                    }, 6000);
+                } else {
+                    window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
+                }
             })
             .catch(err => console.log(err));
     };
@@ -65,32 +81,23 @@ function TouchlessLogin(props) {
         setShow(false);
 
         // if (formObject.email && formObject.date && formObject.time) {
-            console.log('API.saveAppointments')
-            API.saveAppointments({
-                uuid_id: formObject.uuid_id,
-                email: formObject.email,
-                employee: formObject.employee,
-                date: formObject.date,
-            })
-                .then(res => loadAppointments())
-                .then(() => setFormObject({
-                    email: '',
-                    employee: '',
-                    date: ""
-                }))
-                .catch(err => console.log(err));
+        console.log('API.saveAppointments')
+        API.saveAppointments({
+            uuid_id: formObject.uuid_id,
+            email: formObject.email,
+            employee: formObject.employee,
+            date: formObject.date,
+        })
+            .then(res => loadAppointments())
+            .then(() => setFormObject({
+                email: '',
+                employee: '',
+                date: ""
+            }))
+            .catch(err => console.log(err));
         // }
 
-        const baseurl = window.location.href
-        console.log('baseurl: ', baseurl)
-        if (baseurl.includes('lobbylogin')) {
-            setTimeout(() => {
-                setShowConfirm(false);
-                props.LLsetShow(false);
-            }, 60000);
-        } else {
-            window.location.replace(`${window.origin}/visitorconfirm/${props.uuid_id}`);
-        }
+
 
     };
 
@@ -100,7 +107,6 @@ function TouchlessLogin(props) {
             <Container>
                 <Row>
                     <Col>
-                        <h1>UUID:{`${props.uuid_id}`}</h1>
                         <Form>
                             <Form.Group controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
@@ -116,8 +122,7 @@ function TouchlessLogin(props) {
                                     With whom would you like to set up an appointment with?
                             </Form.Text>
                             </Form.Group>
-
-                            <AvailableTimes datepickerDisabled={datepickerDisabled} availableTimesList={availableTimesList} handleInputChange={handleInputChange} onClick={handleShow} />
+                            <AvailableTimes datepickerDisabled={datepickerDisabled} availableTimesList={availableTimesList} handleInputChange={handleInputChange} onClick={handleShow} showSpinner={showSpinner} setShowSpinner={setShowSpinner} />
                         </Form>
                     </Col>
                 </Row>
@@ -149,14 +154,14 @@ function TouchlessLogin(props) {
                 </Modal>
                 <Modal show={showConfirm} onHide={handleConfirmClose} centered>
                     <Modal.Header closeButton>
-                        <Modal.Title>YOur appointment has been submitted.</Modal.Title>
+                        <Modal.Title>Your appointment has been submitted.</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <VisitorConfirm uuid_id={props.uuid_id} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleConfirmClose}>
-                            Cancel
+                            Close
                         </Button>
                     </Modal.Footer>
                 </Modal>

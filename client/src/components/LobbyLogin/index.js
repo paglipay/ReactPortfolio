@@ -74,6 +74,7 @@ function ModalPage() {
                 </Col>
                 <Col>
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
+                        {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" className="center" /> */}
                         <Card.Body>
                             <Card.Title>I do not have an appointment...</Card.Title>
                             <Card.Text>
@@ -89,13 +90,12 @@ function ModalPage() {
                 </Col>
                 <Col>
                     <Card style={{ paddingTop: '15px', height: '100%' }}>
+                        {/* <MDBIcon style={{ textAlign: 'center' }} icon="camera-retro" size="5x" /> */}
                         <Card.Body>
-                            <Card.Title>Let's Get In Touch!</Card.Title>
+                            <Card.Title>Let's Go Touchless!</Card.Title>
                             <Card.Text>
                                 Ready to start your next project with me? Give me a call or send me an email and I will get back to you as soon as possible!
                             </Card.Text>
-
-                            <h1>UUID:{`${uuid_id}`}</h1>
                             <a href={`${window.origin}/touchlesslogin/${uuid_id}`}>
                                 <QRCode value={`${window.origin}/touchlesslogin/${uuid_id}`} />
                             </a>
@@ -104,7 +104,7 @@ function ModalPage() {
                 </Col>
             </Row>
 
-            <LLModal show={show} setShow={setShow} handleClose={handleClose} uuid_id={uuid_id} />
+            <LLModal show={show} handleClose={handleClose} uuid_id={uuid_id} setShow={setShow} />
         </Container >
     );
 }

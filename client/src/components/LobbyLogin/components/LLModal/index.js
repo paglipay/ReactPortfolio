@@ -4,7 +4,7 @@ import VideoChat from "../../../VideoChat";
 import EmployeeDirectory from "../../../EmployeeDirectory/App";
 import TouchlessLogin from "../../../TouchlessLogin";
 
-export default function index({ show, setShow, handleClose, uuid_id }) {
+export default function index({ show, handleClose, uuid_id, setShow }) {
     return (
         <>
             <Modal show={show} onHide={handleClose} dialogClassName="modal-90w" >

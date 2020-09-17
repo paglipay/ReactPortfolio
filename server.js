@@ -56,8 +56,6 @@ io.on('connection', (socket) => {
     io.to(data.to).emit('callAccepted', data.signal);
   })
 
-
-  
   socket.on('join', ({ name, room }, callback) => {
 
     const { error, user } = addUser({ id: socket.id, name, room });
